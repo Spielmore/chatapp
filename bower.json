@@ -1,0 +1,21 @@
+{
+  "name": "ChatApp",
+  "description": "App for chatting with customer representatives",
+  "main": "index.ejs",
+  "authors": [
+    "chester"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Spielmore/chatapp",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
