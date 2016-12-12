@@ -1,4 +1,6 @@
+var http = require('http');
 var express = require('express');
+var socketio = require("socket.io");
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -42,5 +44,17 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+var server = http.createServer(app);
+
+var io = socketio.listen(server);
+
+io.on('connection', function(){
+	
+});
+
+var port = process.env.PORT || 3000;
+
+server.listen(port);
 
 module.exports = app;
