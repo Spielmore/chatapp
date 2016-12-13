@@ -45,6 +45,17 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+/*app.post('/api/CustInit', function(err, req, res, next) {
+	console.log("MMMMMMMMMM");
+	res.render('chatPage', { title: 'ChatApp', user: req.body.custName });
+	if(req.body.custName){
+		res.render('chatPage', { title: 'ChatApp', name: req.body.custName, role: "customer" });
+	} else {
+		res.send(400, err);
+	}
+
+});*/
+
 var server = http.createServer(app);
 
 var io = socketio.listen(server);

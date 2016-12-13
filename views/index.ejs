@@ -4,30 +4,34 @@
     <title><%= title %></title>
 	<link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/mainPage.css' />
+	<script src='/javascripts/jquery.min.js'></script>
+	<script src='/libraries/angular/angular.min.js'></script>
+	<script src='/javascripts/mainPage.js'></script>
   </head>
-  <body>
+  <body ng-app="mainPage">
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-	<div class="container">
+	<div class="container" ng-controller="mainPageController">
 		<div class="row">  
 			<div class="col-md-offset-2 col-md-4">
 				<div class="box1">
-				  <h3>I am a New Customer</h2>
+				  <h3>I am a New Customer</h3>
+				  <input id="checkboxOne" class="form-check-input" type="checkbox">
 				</div>
-				<form class="form-horizontal">
+				<form class="form-horizontal" method='post' ng-submit="custInit(custInput.text)">
 					<fieldset>
 					<!-- Text input-->
 					<div class="form-group">
 					 
 					  <div class="col-md-7">
-						<input id="textinput" name="textinput" type="text" placeholder="Enter Your Name" class="form-control input-md" required="">
+						<input id="custextinput" name="custextinput" type="text" placeholder="Enter Your Name" class="form-control input-md" required="" ng-model="custInput.text">
 					  </div>
 					</div>
 
 					<!-- Button -->
 					<div class="form-group">
 					  <div class="col-md-7">
-						<button id="customerButton" name="customer" class="btn btn-danger">Start Session</button>
+						<button id="custbutton" name="custbutton" class="btn btn-danger" >Start Session</button>
 					  </div>
 					</div>
 					</fieldset>
@@ -37,21 +41,22 @@
 			 <div class="col-md-4">
 				 <div class="box1">
 				  <h4>I am a Customer Representative</h4>
+				  <input id="checkboxTwo" class="form-check-input" type="checkbox">
 				</div>
-				<form class="form-horizontal">
+				<form class="form-horizontal" ng-submit="repInit(repInput.text)">
 					<fieldset>
 					<!-- Text input-->
 					<div class="form-group">
 					 
 					  <div class="col-md-7">
-						<input id="textinput" name="textinput" type="text" placeholder="Enter Your Name" class="form-control input-md" required="">
+						<input id="reptextinput" name="reptextinput" type="text" placeholder="Enter Your Name" class="form-control input-md" required="" ng-model="repInput.text">
 					  </div>
 					</div>
 
 					<!-- Button -->
 					<div class="form-group">
 					  <div class="col-md-7">
-						<button id="repButton" name="rep" class="btn btn-success">Start Session</button>
+						<button id="repButton" name="repButton" class="btn btn-success" >Start Session</button>
 					  </div>
 					</div>
 					</fieldset>
@@ -59,7 +64,31 @@
 			</div>
 		</div>  
 	</div>
+	<script>
+	$(document).ready(function(){
+	    
+	  var $repInput = document.getElementById('reptextinput');
+	  var $repBtn = document.getElementById('repButton');
+	  var $cusBtn = document.getElementById('custbutton');
+      var $cusInput = document.getElementById('custextinput');
+      
+      $repInput.disabled = true;
+      $repBtn.disabled = true;
+      $cusBtn.disabled = true;
+      $cusInput.disabled = true;
+	    
+	  document.getElementById('checkboxTwo').onchange = function() {
+      $repInput.disabled = !this.checked;
+      $repBtn.disabled = !this.checked;
+     };
+      document.getElementById('checkboxOne').onchange = function() {
+      $cusBtn.disabled = !this.checked;
+      $cusInput.disabled = !this.checked;
+     };
+	});
+   </script>
   </body>
 </html>
 
+  
 
