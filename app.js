@@ -60,12 +60,14 @@ var server = http.createServer(app);
 
 var io = socketio.listen(server);
 
-io.on('connection', function(){
-	
-});
+/*io.on('connection', function(){
+	console.log("socket.io server")
+});*/
 
 var port = process.env.PORT || 3000;
 
 server.listen(port);
 
 module.exports = app;
+
+require('./chatSocketApp').start(io.sockets, app);

@@ -5,16 +5,17 @@
 	<link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/chatPage.css' />
 	<script src='/javascripts/jquery.min.js'></script>
+	<script src="/socket.io/socket.io.js"></script>
 	<script src='/libraries/angular/angular.min.js'></script>
 	<script src='/javascripts/chatPage.js'></script>
   </head>
   <body ng-app="chatPage">
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+	<script>var user="<%= name %>";</script>
+	<script>var role="<%= role %>";</script>
 	<div class="container" ng-controller="chatPageController">
 		<div class="row">  
 			<div class="col-md-offset-2 col-md-4">
-				<div class="box1">
+				<div id="chatWall" class="box1" style="white-space: pre;">
 				</div>
 				<form class="form-horizontal">
 					<fieldset>
@@ -22,14 +23,15 @@
 					<div class="form-group">
 					 
 					  <div class="col-md-7">
-						<textarea class="form-control" id="textarea" name="textarea"></textarea>
+						<textarea class="form-control" id="textarea" name="textarea"  ng-model="chatMsg.text"></textarea>
 					  </div>
 					</div>
 
 					<!-- Button -->
 					<div class="form-group">
 					  <div class="col-md-7">
-						<button id="custbutton" name="custbutton" class="btn btn-danger" ng-click="custInit()">Submit</button>
+						<button id="custbutton" name="custbutton" class="btn btn-danger" ng-click="sendMessage()">Submit</button>
+						<div class="col-md-offset-12"><button id="startBtn" name="startBtn" class="btn btn-default" ng-click="findPartner()">Start New Chat</button></div>
 					  </div>
 					</div>
 					</fieldset>
@@ -41,16 +43,10 @@
 	<script>
 	$(document).ready(function(){
 	    
-	  var $cusBtn = document.getElementById('custbutton');
+	  var $chatWall = document.getElementById('chatBox');
       var $cusInput = document.getElementById('custextinput');
       
-      $cusBtn.disabled = true;
-      $cusInput.disabled = true;
-	    
-      document.getElementById('checkboxOne').onchange = function() {
-      $cusBtn.disabled = !this.checked;
-      $cusInput.disabled = !this.checked;
-     };
+      var socket = io.connect();
 	});
    </script>
   </body>

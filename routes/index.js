@@ -8,12 +8,16 @@ router.get('/', function(req, res, next) {
 
 /* GET chat page. */
 router.get('/chatPage', function(req, res, next) {
-  res.render('chatPage', { title: 'ChatApp' });
-});
+  console.log(req.body);
+  res.render('chatPage', { title: 'ChatApp'});
+}); 
 
-router.post('/api/CustInit', function(req, res, next) {
-	if(req.body.custName){
-		res.render('chatPage', { title: 'ChatApp', name: req.body.custName, role: "customer" });
+
+router.post('/api/custInit', function(req, res, next) {
+	if(req.body.custextinput){
+		var name = req.body.custextinput;
+		//res.set("Content-Type", "application/javascript");
+		res.render('chatPage', {title: 'ChatApp', name: name, role: "customer"}); //title: 'ChatApp', name: req.body.custName, role: "customer"
 	} else {
 		res.send("Failed to render Chat Page");
 	}
@@ -21,9 +25,10 @@ router.post('/api/CustInit', function(req, res, next) {
 });
 
 /* Render chat page. */
-router.post('/api/RepInit', function(req, res, next) {
-	if(req.body.repName){
-		res.render('chatPage', { title: 'ChatApp', name: req.body.repName, role:"rep" });
+router.post('/api/repInit', function(req, res, next) {
+	if(req.body.reptextinput){
+		var name = req.body.reptextinput;
+		res.render('chatPage', { title: 'ChatApp', name: name, role:"rep" });
 	} else {
 		res.send("Failed to render Chat Page");
 	}

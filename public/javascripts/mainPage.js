@@ -2,8 +2,8 @@
 
    var mainPageModule = angular.module('mainPage', [])
    
-   mainPageModule.controller("mainPageController", ["$scope", "$window", "$http",
-		function($scope, $window, $http){
+   mainPageModule.controller("mainPageController", ["$scope", "$rootScope", "$window", "$http",
+		function($scope, $rootScope, $window, $http){
 			
 			$scope.custInput = {};
 			$scope.repInput = {};
@@ -13,7 +13,8 @@
 					$http.post("/api/RepInit", {repName: repName})
 						.then(function (result) {
 						  //success
-						  $window.location.href = "/chatPage";
+
+						  //$window.location.href = "/chatPage";
 						}, function (err) {
 						  //failure
 						  console.log("Failed to initialize Customer Rep");
@@ -24,10 +25,11 @@
 			
 			$scope.custInit = function(custName){
 				if(custName){
-					$http.post("/api/CustInit", {custName: custName}) 
+					$http.post("/api/CustInit", {custmName: custName}) 
 						.then(function (result) {
 						  //success
-						  $window.location.href = "/chatPage";
+
+						  //$window.location.href = "/chatPage";
 						}, function (err) {
 						  //failure
 						  console.log("Failed to initialize Customer");
