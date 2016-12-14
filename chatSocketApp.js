@@ -49,7 +49,10 @@ exports.start = function(sockets, app) {
 			  
 			  socket.inlist = false;
 			  partnerSocket.inlist = false;
-			  console.log("found one");
+			  
+			  socket.emit("foundUser", partner.name);
+			  socket.partnerSocket.emit("foundUser", currUser.name);
+
 		  }else{
 			 if (socket.partner) {							
 			  delete socket.partner;
@@ -68,8 +71,11 @@ exports.start = function(sockets, app) {
 		
 		socket.on('sendMsg', function(data){
 			//sockets.emit('newMsg', data);
-			socket.partnerSocket.emit('newMsg', data);
-			socket.emit('newMsg', data);
+			if(socket.partnerSocket){
+				socket.partnerSocket.emit('newMsg', data);
+				socket.emit('newMsg', data);
+			}
+			
 		});
 		
 	});

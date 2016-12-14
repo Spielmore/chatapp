@@ -5,8 +5,11 @@
 	<link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/chatPage.css' />
 	<script src='/javascripts/jquery.min.js'></script>
+	<script src='/javascripts/bootstrap.min.js'></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src='/libraries/angular/angular.min.js'></script>
+	<script src="/libraries/bootbox/bootbox.js"></script>
+	<script src='/libraries/ngBootbox/dist/ngBootbox.js'></script>
 	<script src='/javascripts/chatPage.js'></script>
   </head>
   <body ng-app="chatPage">
@@ -15,7 +18,7 @@
 	<div class="container" ng-controller="chatPageController">
 		<div class="row">  
 			<div class="col-md-offset-2 col-md-4">
-				<div id="chatWall" class="box1" style="white-space: pre;">
+				<div id="chatWall" class="box1">
 				</div>
 				<form class="form-horizontal">
 					<fieldset>
@@ -36,6 +39,10 @@
 					</div>
 					</fieldset>
 				</form>
+				<button id="alertBtn" ng-hide="true" class="btn btn-default" style="color: #337ab7;" ng-bootbox-alert="You Are Now Connected To A User!" >
+					Alert
+				</button>
+				
 			</div>
 			  
 		</div>  
@@ -44,8 +51,9 @@
 	$(document).ready(function(){
 	    
 	  var $chatWall = document.getElementById('chatBox');
-      var $cusInput = document.getElementById('custextinput');
-      
+      var $startBtn = document.getElementById('startBtn');
+	  $startBtn.click();
+
       var socket = io.connect();
 	});
    </script>
